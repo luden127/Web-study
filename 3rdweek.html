@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="inputField" onchange="handleInputChange(event)" />
+    <form id="myForm">
+        <input type="text" name="username" />
+        <input type="password" name="password" />
+    </form>
+    <div id="output"></div>
+    <button onclick="showInputValues()">보기</button>
+    <script>
+        function handleInputChange(event) {
+            var inputValue = event.target.value;
+            alert(`입력된 값은 ${inputValue}입니다!`);
+        }
+
+        function showInputValues() {
+            var form = document.getElementById("myForm");
+            var username = form.username.value;
+            var password = form.password.value;
+
+            console.log("사용자 이름:", username);
+            console.log("비밀번호:", password);
+
+            var outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = "입력된 값:<br>사용자 이름: " + username + "<br>비밀번호: " + password;
+        }
+    </script>
+
+<label>
+    <span class="input_label">아이디</span>
+    <input type="text" name="id" />
+  </label>
+</body>
+</html>

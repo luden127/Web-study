@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mouse Movement Distance</title>
+</head>
+<body>
+    <button id="startButton">Start</button>
+    <button id="stopButton">Stop</button>
+    <p id="distanceDisplay">Distance moved: X: 0, Y: 0</p>
+    
+    <script>
+        const startButton = document.getElementById("startButton");
+        const stopButton = document.getElementById("stopButton");
+        const distanceDisplay = document.getElementById("distanceDisplay");
+
+        let isMousePressed = false;
+        let startX, startY;
+        let totalDistanceX = 0;
+        let totalDistanceY = 0;
+
+        startButton.addEventListener("click", () => {
+            isMousePressed = true;
+        });
+
+        stopButton.addEventListener("click", () => {
+            isMousePressed = false;
+            totalDistanceX = 0;
+            totalDistanceY = 0;
+            updateDistanceDisplay();
+        });
+
+        document.addEventListener("mousedown", (event) => {
+            if (isMousePressed) {
+                startX = event.clientX;
+                startY = event.clientY;
+            }
+        });
+
+        document.addEventListener("mousemove", (event) => {
+            if (isMousePressed) {
+                const currentX = event.clientX;
+                const currentY = event.clientY;
+                const deltaX = currentX - startX;
+                const deltaY = currentY - startY;
+
+                totalDistanceX += deltaX;
+                totalDistanceY += deltaY;
+
+                startX = currentX;
+                startY = currentY;
+
+                updateDistanceDisplay();
+            }
+        });
+
+        function updateDistanceDisplay() {
+            distanceDisplay.textContent = `Distance moved: X: ${totalDistanceX}, Y: ${totalDistanceY}`;
+        }
+    </script>
+</body>
+</html>

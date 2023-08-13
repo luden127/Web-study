@@ -1,0 +1,51 @@
+<head>
+  <style>
+    .error_message {
+      display: none;
+      color: red;
+    }
+    .active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <form onchange="handleFormChange(event)">
+    <input type="password" name="password" />
+    <div id="error_message_password" class="error_message"></div>
+  </form>
+
+  <script>
+    function handleFormChange(event) {
+      const changedInput = event.target;
+      const changedInputName = changedInput.name;
+
+      const errorMessageElement = document.getElementById(
+        `error_message_${changedInputName}`
+      );
+
+      const validationErrorMessage = validate[changedInputName](
+        changedInput.value
+      );
+
+      if (validationErrorMessage) {
+        errorMessageElement.innerHTML = validationErrorMessage;
+        errorMessageElement.classList.add("active");
+      } else {
+        errorMessageElement.innerHTML = "";
+        errorMessageElement.classList.remove("active");
+      }
+    }
+
+    const validate = {
+      password: (password) => {
+        if (!password) {
+          return "비밀번호를 입력해주세요.";
+        }
+        if (password.length < 8) {
+          return "비밀번호는 8자 이상이어야 합니다.";
+        }
+      },
+    };
+  </script>
+</body>
